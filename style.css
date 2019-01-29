@@ -1,0 +1,19 @@
+body {
+    background-color: rgb(45, 45, 45);
+    font-family: 'Georia', sans-serif;
+    color: white;
+
+}
+
+a {
+    color: grey;
+
+}
+
+li {
+    font-size: 150%;
+}
+
+p {
+    font-size: 170%;
+}
