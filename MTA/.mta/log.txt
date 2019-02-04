@@ -78,7 +78,7 @@ Caused by: java.io.IOException: CreateProcess error=2, Не удается найти указанны
 	... 69 more
 [main] INFO com.sap.di.ext.mta.proc.DescriptorProcessorImpl - MTA manifest processing on 7 threads
 [main] INFO com.sap.di.ext.mta.cli.CliExecutor - arguments: [--build-target=CF, build]
-[main] INFO com.sap.di.ext.mta.cli.CliExecutor - Archive path is C:\Users\Lenovo\Desktop\MTA\MTA.mtar
+[main] INFO com.sap.di.ext.mta.cli.CliExecutor - Archive path is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\MTA.mtar
 [main] DEBUG com.sap.di.ext.mta.cli.CliBuildExecutor - Starting MTA build
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DesignDescriptor$$impl0 for bean interface com.sap.di.ext.mta.dto.DesignDescriptor
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DesignModule$$impl1 for bean interface com.sap.di.ext.mta.dto.DesignModule
@@ -95,10 +95,10 @@ Caused by: java.io.IOException: CreateProcess error=2, Не удается найти указанны
 [pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA HiMTA: finished symbol resource[pt_hdi]
 [pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command timeout is 300 seconds
 [pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command timeout is 300 seconds
-[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command output file is C:\Users\Lenovo\Desktop\MTA\.mta\modulebuild9130739204588406903.txt
-[pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command output file is C:\Users\Lenovo\Desktop\MTA\.mta\modulebuild5696391966712002759.txt
-[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': invoking command [npm.cmd, install, --production]
+[pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild11935463593146910444.txt
+[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild18061381654173353739.txt
 [pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': invoking command [npm.cmd, install, --production]
+[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': invoking command [npm.cmd, install, --production]
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA HiMTA: finished symbol module[db]
 [pool-1-thread-3] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA HiMTA: finished symbol module[service]
 [main] INFO com.sap.di.beans.DynamicBeans - Created implementation class com.sap.di.ext.mta.dto.DeploymentDescriptor$$impl6 for bean interface com.sap.di.ext.mta.dto.DeploymentDescriptor
