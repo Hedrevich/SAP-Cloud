@@ -1,0 +1,7 @@
+npm WARN service@1.0.0 No description
+npm WARN service@1.0.0 No repository field.
+npm WARN service@1.0.0 No license field.
+
+audited 841 packages in 2.396s
+found 0 vulnerabilities
+
