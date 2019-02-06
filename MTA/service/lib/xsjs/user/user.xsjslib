@@ -9,8 +9,7 @@ var user = function (connection) {
 
     this.doGet = function () {
         const result = connection.executeQuery('SELECT * FROM "HiMTA::User"');
-
-        result.forEach(x => $.trace.error(JSON.stringify(x)));
+            result.forEach(x => $.trace.error(JSON.stringify(x)));
 
         $.response.status = $.net.http.OK;
         $.response.setBody(JSON.stringify(result));
