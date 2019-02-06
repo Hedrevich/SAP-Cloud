@@ -2,6 +2,7 @@ node_modules
 mta-op-*
 .mta
 .che
+MTA.mtar
 
 fioriHtmlRunner.html
 .*/fioriHtmlRunner.html
