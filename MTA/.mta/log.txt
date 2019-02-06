@@ -95,8 +95,8 @@ Caused by: java.io.IOException: CreateProcess error=2, Не удается найти указанны
 [pool-1-thread-1] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA HiMTA: finished symbol resource[pt_hdi]
 [pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command timeout is 300 seconds
 [pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command timeout is 300 seconds
-[pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild1524012234099557712.txt
-[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild12642531699310316226.txt
+[pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild6713834360042716246.txt
+[pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': command output file is C:\Users\Lenovo\Desktop\SAP-Cloud\MTA\.mta\modulebuild10838341410471809015.txt
 [pool-1-thread-2] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'db': invoking command [npm.cmd, install, --production]
 [pool-1-thread-3] DEBUG com.sap.di.ext.mta.cli.CommandHelper - Module 'service': invoking command [npm.cmd, install, --production]
 [pool-1-thread-2] INFO com.sap.di.ext.mta.proc.ProcessingRun - Verifying MTA HiMTA: finished symbol module[db]

@@ -131,7 +131,7 @@ var user = function (connection) {
           sColumnList = sColumnList.slice(0, -1);
           sValueList = sValueList.slice(0, -2);
 
-          oResult.sql = `UPDATE "${sTableName}" SET "name"='${sValueList}' WHERE "usid"=002;  values ()`;
+   oResult.sql = `UPDATE "${sTableName}" SET "name"='${oValueObject.name}' WHERE "usid"=${oValueObject.usid};`;
 
           $.trace.error("sql to update: " + oResult.sql);
           return oResult;
