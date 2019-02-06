@@ -33,21 +33,38 @@ var user = function (connection) {
     };
 
 
-    this.doPut = function (obj) {
-        //TODO
+    this.doPut = function (oUser) {
+
+       let oResult = {
+          aParams: [],
+          aValues: [],
+          sql: "",
+      };
+
+      oResult.sql = `UPDATE "${USER_TABLE}" SET "name"='${oUser.name}' WHERE "usid"=${oUser.usid};`;
+
+      $.trace.error("sql to update: " + oResult.sql);
+     // const statement = createPreparedUpdateStatement(USER_TABLE, oUser);
+      //execute update
+      connection.executeUpdate(oResult.sql, oResult.aValues);
+
+      connection.commit();
+      $.response.status = $.net.http.OK;
+      $.response.setBody(JSON.stringify(oUser));
     };
 
 
-    this.doDelete = function (usid) {
-        const statement = createPreparedDeleteStatement(USER_TABLE, {
-            usid: usid
-        });
-        connection.executeUpdate(statement.sql, statement.aValues);
+    this.doDelete = function (oUser) {
 
-        connection.commit();
-        $.response.status = $.net.http.OK;
-        $.response.setBody(JSON.stringify({}));
-    };
+     const statement = createPreparedDeleteStatement(USER_TABLE, oUser);
+
+     connection.executeUpdate(statement.sql, statement.aValues);
+     connection.commit();
+
+     $.response.status = $.net.http.OK;
+     $.response.setBody(JSON.stringify({}));
+ };
+
     function getNextval(sSeqName) {
         const statement = `select "${sSeqName}".NEXTVAL as "ID" from dummy`;
         const result = connection.executeQuery(statement);
@@ -60,6 +77,7 @@ var user = function (connection) {
     }
 
     function createPreparedInsertStatement(sTableName, oValueObject) {
+
       let oResult = {
                 aParams: [],
                 aValues: [],
@@ -91,29 +109,44 @@ var user = function (connection) {
             return oResult;
     };
 
+    this.createPreparedUpdateStatement = function (sTableName, oValueObject) {
+          let oResult = {
+              aParams: [],
+              aValues: [],
+              sql: "",
+          };
+          let sColumnList = '', sValueList = '';
+
+          Object.keys(oValueObject).forEach(value => {
+              sColumnList += `"${value}",`;
+              oResult.aParams.push(value);
+          });
+
+          Object.values(oValueObject).forEach(value => {
+              sValueList += "?, ";
+              oResult.aValues.push(value);
+          });
+
+          // Remove the last unnecessary comma and blank
+          sColumnList = sColumnList.slice(0, -1);
+          sValueList = sValueList.slice(0, -2);
+
+          oResult.sql = `UPDATE "${sTableName}" SET "name"='${sValueList}' WHERE "usid"=002;  values ()`;
+
+          $.trace.error("sql to update: " + oResult.sql);
+          return oResult;
+      };
+
     function createPreparedDeleteStatement(sTableName, oConditionObject) {
-        let oResult = {
-            aParams: [],
-            aValues: [],
-            sql: "",
-        };
+      let oResult = {
+       aParams: [],
+       aValues: [],
+       sql: "",
+   };
 
-        let sWhereClause = '';
-        var name, value, condIndex, condition;
-        oConditionObject.forEach((value, key) => {
-            whereClause += `"${key}"=? and `;
-            oResult.aValues.push(value);
-            oResult.aParams.push(key);
-        });
-        // Remove the last unnecessary AND
-        sWhereClause = sWhereClause.slice(0, -5);
-        if (sWhereClause.length > 0) {
-            sWhereClause = " where " + sWhereClause;
-        }
+   oResult.sql = `DELETE FROM "${sTableName}" WHERE "usid"='${oConditionObject.usid}'`;
 
-        oResult.sql = `delete from "${sTableName}" ${sWhereClause}`;
-
-        $.trace.error("sql to delete: " + oResult.sql);
-        return oResult;
+   $.trace.error("sql to delete: " + oResult.sql);
+   return oResult;
     };
 };

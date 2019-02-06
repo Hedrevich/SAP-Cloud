@@ -7,7 +7,7 @@ const userLib = new Userlib($.hdb.getConnection({
     (function handleRequest() {
         try {
             switch ($.request.method) {
-                
+
                 case $.net.http.GET : {
                     userLib.doGet();
                     break;
@@ -21,8 +21,8 @@ const userLib = new Userlib($.hdb.getConnection({
                     break;
                 }
                 case $.net.http.DEL : {
-                    userLib.doDelete($.request.parameters.get("userid"));
-                    break;
+                   userLib.doDelete(JSON.parse($.request.body.asString()));
+                   break;
                 }
                 default: {
                     $.response.status = $.net.http.METHOD_NOT_ALLOWED;
