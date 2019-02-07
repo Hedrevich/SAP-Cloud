@@ -1,8 +1,13 @@
 const Userlib = $.import('xsjs.user', 'user').user;
-const userLib = new Userlib($.hdb.getConnection({
-    treatDateAsUTC: true
-}));
 
+const PREFIX = "HiMTA::";
+const TABLE_NAME = "User";
+
+const userLib = new Userlib(
+    $.hdb.getConnection({ treatDateAsUTC: true}),
+    PREFIX,
+    TABLE_NAME
+);
 (function () {
     (function handleRequest() {
         try {
@@ -21,7 +26,7 @@ const userLib = new Userlib($.hdb.getConnection({
                     break;
                 }
                 case $.net.http.DEL : {
-                   userLib.doDelete(JSON.parse($.request.body.asString()));
+                   userLib.doDelete(JSON.parse($.request.parameters.get("usid")));
                    break;
                 }
                 default: {
