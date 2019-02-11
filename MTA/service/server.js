@@ -1,27 +1,33 @@
 /*eslint no-console: 0, no-unused-vars: 0*/
 "use strict";
 
-var xsjs  = require("@sap/xsjs");
+var xsjs = require("@sap/xsjs");
 var xsenv = require("@sap/xsenv");
-var port  = process.env.PORT || 3000;
+var port = process.env.PORT || 3000;
 
 var options = {
-  	anonymous : true, // remove to authenticate calls
-    redirectUrl : "/index.xsjs"
+  anonymous: true, // remove to authenticate calls
+  redirectUrl: "/index.xsjs"
 };
 
 // configure HANA
 try {
-    options = Object.assign(options, xsenv.getServices({ hana: {tag: "hana"} }));
+  options = Object.assign(options, xsenv.getServices({
+    hana: {
+      tag: "hana"
+    }
+  }));
 } catch (err) {
-    console.log("[ERROR]", err.message);
+  console.log("[ERROR]", err.message);
 }
 
 // configure UAA.  Our uaa is pt_uaa
 try {
-    options = Object.assign(options, xsenv.getServices({ uaa: "pt_uaa" }));
+  options = Object.assign(options, xsenv.getServices({
+    uaa: "pt_uaa"
+  }));
 } catch (err) {
-    console.log("[ERROR]", err.message);
+  console.log("[ERROR]", err.message);
 }
 
 // start server
