@@ -1,36 +1,9 @@
-ID: HiMTA
-_schema-version: '2.1'
+﻿ID: HiMTA
+_schema-version: 2.1
 version: 0.0.1
 parameters:
     deploy_mode: html5-repo
-
 modules:
-    -
-        name: router
-        type: nodejs
-        path: router
-        parameters:
-            disk-quota: 256M
-            memory: 256M
-        properties:
-            XS_APP_LOG_LEVEL: debug
-        requires:
-            - {name: pt_dest}
-            - {name: pt_conn}
-            - {name: pt_uaa}
-            - {name: pt_router}
-            - {name: pt_service, group: destinations, properties: {name: pt_service, url: '~{url}'}}
-    -
-        name: deployer
-        type: com.sap.html5.application-content
-        path: deployer
-        requires:
-            - {name: pt_deployer}
-        build-parameters:
-            requires: [{name: user_create, artifacts: ['./*'], target-path: resources/user_create},{name: user_display, artifacts: ['./*'], target-path: resources/user_display}]
-        parameters:
-            disk-quota: 256M
-            memory: 256M
     -
         name: db
         type: hdb
@@ -40,8 +13,8 @@ modules:
         provides:
             - {name: pt_db}
         parameters:
-            memory: 1024M
-            disk_quota: 1024M
+            memory: 128M
+            disk_quota: 128M
     -
         name: service
         type: nodejs
@@ -49,11 +22,24 @@ modules:
         requires:
             - {name: pt_db}
             - {name: pt_hdi}
+            - {name: pt_uaa}
         provides:
             - {name: pt_service, properties: {url: '${default-url}'}}
         parameters:
-            memory: 512M
-            disk_quota: 512M
+            memory: 128M
+            disk_quota: 128M
+#    -
+#        name: flp
+#        type: com.sap.portal.site-content
+#        path: flp
+#        parameters:
+#            memory: 128M
+#            buildpack: 'https://github.com/cloudfoundry/nodejs-buildpack/releases/download/v1.6.21/nodejs-buildpack-v1.6.21.zip'
+#        requires:
+#            - {name: pt_portal}
+#            - {name: pt_uaa}
+#            - {name: pt_deployer}
+#            - {name: deployer}
     -
         name: user_create
         type: html5
@@ -76,13 +62,45 @@ modules:
             builder: grunt
         requires:
             - {name: pt_uaa}
+    -
+        name: router
+        type: nodejs
+        path: router
+        parameters:
+            disk-quota: 256M
+            memory: 128M
+        properties:
+            XS_APP_LOG_LEVEL: debug
+        requires:
+            - {name: pt_dest}
+            - {name: pt_conn}
+            - {name: pt_uaa}
+            - {name: pt_router}
+#            - {name: pt_portal}
+            - {name: pt_service, group: destinations, properties: {name: pt_service, url: '~{url}', forwardAuthToken: true}}
+    -
+        name: deployer
+        type: com.sap.html5.application-content
+        path: deployer
+        requires:
+            - {name: pt_deployer}
+        build-parameters:
+            requires: [{name: user_create, artifacts: ['./*'], target-path: resources/user_create},{name: user_display, artifacts: ['./*'], target-path: resources/user_display}]
+        parameters:
+            disk-quota: 256M
+            memory: 128M
 resources:
+#    -   name: pt_portal
+#        parameters:
+#           service-plan: standard
+#           service: portal
+#        type: org.cloudfoundry.managed-service
     -
         name: pt_uaa
         parameters:
-           path: ./xs-security.json
-           service-plan: application
-           service: xsuaa
+            path: ./xs-security.json
+            service-plan: application
+            service: xsuaa
         type: org.cloudfoundry.managed-service
     -
         name: pt_hdi
