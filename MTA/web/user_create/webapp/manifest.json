@@ -54,29 +54,11 @@
     ]
   },
 
-  "sap.ui": {
-    "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    },
-    "supportedThemes": [
-      "sap_hcb",
-      "sap_belize"
-
-    ]
-  },
-
   "sap.ui5": {
+    "rootView": {
+      "viewName": "user_create.view.App",
+      "type": "XML"
+    },
     "dependencies": {
       "minUI5Version": "1.60.1",
       "libs": {
