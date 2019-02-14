@@ -2,6 +2,7 @@ var JsonFormatter = $.import('xsjs', 'JsonFormatter').formatter;
 
 
 const sTABLE_NAME = "HiMTA::Author";
+const sAUTHOR_ID = "HiMTA::author_id";
 
 function authorsUpdate(param) {
     var after = param.afterTableName;
