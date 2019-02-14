@@ -1,5 +1,5 @@
-﻿namespace HiMTA;
-using HiMTA::User;
+namespace HiMTA;
+using HiMTA::Author;
 
 context ExtraInfo{
 
@@ -7,7 +7,7 @@ context ExtraInfo{
     		@Comment: 'Id of Address'
 		    key adid : Integer64 generated always as identity ( start with 1 increment by 1 );
 		    @Comment: 'User for Address'
-		    usid : String(4);
+		    author_id : String(4);
 		    @Comment: 'City'
 		    city : String(100);
 		    @Comment: 'Street'
@@ -16,14 +16,14 @@ context ExtraInfo{
 		    hnum : Integer;
 		};
 
-		entity Cars {
-		    @Comment: 'Id of Car'
-		    key crid : String(4);
-		    @Comment: 'User for Car'
-		    usid : String(4);
-		    @Comment: 'Name'
+		entity Book {
+		    @Comment: 'Id of Book'
+		    key book_id : String(4);
+		    @Comment: 'Book author'
+		    author_id : String(4);
+		    @Comment: 'Name of book'
 		    name : String(100);
 
-    		toUser : Association[1] to User on toUser.usid = usid;
+    		toAuthor : Association[1] to Author on toAuthor.author_id = author_id;
 		};
 };

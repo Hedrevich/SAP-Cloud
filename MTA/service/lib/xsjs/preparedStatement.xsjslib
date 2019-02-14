@@ -1,72 +1,71 @@
 var oResultConstructor = $.import('xsjs', 'oResult').lib;
 
 var lib = class PreparedStatement {
-    static createPreparedInsertStatement(sTableName, oValueObject) {
-        let oResult = new oResultConstructor();
+  static createPreparedInsertStatement(sTableName, oValueObject) {
+    let oResult = new oResultConstructor();
 
-        let sColumnList = '', sValueList = '';
+    let sColumnList = '',
+      sValueList = '';
+ //new
+      Object.keys(oValueObject).forEach(key => {
+      sColumnList += `"${key}",`;
+      oResult.aParams.push(key);
 
-        Object.keys(oValueObject).forEach(value => {
-            sColumnList += `"${value}",`;
-            oResult.aParams.push(value);
-        });
+      sValueList += "?, ";
+      oResult.aValues.push(oValueObject[key]);
+    });
 
-        Object.values(oValueObject).forEach(value => {
-            sValueList += "?, ";
-            oResult.aValues.push(value);
-        });
+    $.trace.error("svalue " + sValueList);
+    $.trace.error("scolumn: " + sColumnList);
 
-        $.trace.error("svalue " + sValueList);
-        $.trace.error("scolumn: " + sColumnList);
+    // Remove the last unnecessary comma and blank
+    sColumnList = sColumnList.slice(0, -1);
+    sValueList = sValueList.slice(0, -2);
 
-        // Remove the last unnecessary comma and blank
-        sColumnList = sColumnList.slice(0, -1);
-        sValueList = sValueList.slice(0, -2);
+    oResult.sql = `insert into "${sTableName}" (${sColumnList}) values (${sValueList})`;
 
-        oResult.sql = `insert into "${sTableName}" (${sColumnList}) values (${sValueList})`;
+    $.trace.error("sql to insert: " + oResult.sql);
+    return oResult;
+  }
 
-        $.trace.error("sql to insert: " + oResult.sql);
-        return oResult;
+  static createPreparedSelectStatement(sTableName, oValueObject) {
+    //generate query
+    let oResult = new oResultConstructor();
+
+    if (oValueObject === undefined) {
+      oResult.sql += `SELECT *`;
+    } else {
+      oResult.sql += "SELECT ";
+      for (let key in oValueObject.keys) {
+        oResult.aParams.push(key);
+        oResult.sql += `${key}, `;
+      }
+      oResult.sql.slice(-2);
     }
 
-    static createPreparedSelectStatement(sTableName, oValueObject) {
-        //generate query
-        let oResult = new oResultConstructor();
+    oResult.sql += ` FROM ${sTableName}`;
 
-        if (oValueObject === undefined){
-            oResult.sql += `SELECT *`;
-        } else {
-            oResult.sql += "SELECT ";
-            for (let key in oValueObject.keys){
-                oResult.aParams.push(key);
-                oResult.sql += `${key}, `;
-            }
-            oResult.sql.slice(-2);
-        }
+    return oResult;
+  }
 
-        oResult.sql += ` FROM ${sTableName}`;
+  static createPreparedDeleteStatement(sTableName, oConditionObject) {
+    let oResult = new oResultConstructor();
 
-        return oResult;
+    let sWhereClause = '';
+    for (let key in oConditionObject) {
+      sWhereClause += ` "${key}"=? and `;
+      oResult.aValues.push(oConditionObject[key]);
+      oResult.aParams.push(key);
+    }
+    // Remove the last unnecessary AND
+    sWhereClause = sWhereClause.slice(0, -5);
+    if (sWhereClause.length > 0) {
+      sWhereClause = " where " + sWhereClause;
     }
 
-    static createPreparedDeleteStatement(sTableName, oConditionObject) {
-        let oResult = new oResultConstructor();
+    oResult.sql = `delete from "${sTableName}" ${sWhereClause}`;
 
-        let sWhereClause = '';
-        for (let key in oConditionObject) {
-            sWhereClause += ` "${key}"=? and `;
-            oResult.aValues.push(oConditionObject[key]);
-            oResult.aParams.push(key);
-        }
-        // Remove the last unnecessary AND
-        sWhereClause = sWhereClause.slice(0, -5);
-        if (sWhereClause.length > 0) {
-            sWhereClause = " where " + sWhereClause;
-        }
-
-        oResult.sql = `delete from "${sTableName}" ${sWhereClause}`;
-
-        $.trace.error("sql to delete: " + oResult.sql);
-        return oResult;
-    };
+    $.trace.error("sql to delete: " + oResult.sql);
+    return oResult;
+  };
 };

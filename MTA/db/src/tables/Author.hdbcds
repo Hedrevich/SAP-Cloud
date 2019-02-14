@@ -1,0 +1,11 @@
+namespace HiMTA;
+
+using HiMTA::ExtraInfo.Address;
+using HiMTA::ExtraInfo.Book;
+
+entity Author {
+    @Comment: 'Id of Author'
+    key author_id : String(4);
+    @Comment: 'Author name'
+    name : String(100);
+};

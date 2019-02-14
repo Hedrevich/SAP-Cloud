@@ -1,9 +1,9 @@
 var PreparedStatementLib = $.import('xsjs', 'preparedStatement').lib;
 
-var user = function (connection, prefix, tableName) {
+var Author = function (connection, prefix, tableName) {
 
-    const PREFIX = prefix;
-    const USER_TABLE = prefix + tableName;
+    const sPREFIX = prefix;
+    const sTABLE_NAME = prefix + tableName;
     /*
             const USER = $.session.securityContext.userInfo.familyName ?
                 $.session.securityContext.userInfo.familyName + " " + $.session.securityContext.userInfo.givenName :
@@ -11,7 +11,7 @@ var user = function (connection, prefix, tableName) {
     */
 
     this.doGet = function () {
-      const result = connection.executeQuery('SELECT * FROM "HiMTA::User"');
+      const result = connection.executeQuery('SELECT * FROM "HiMTA::Author"');
             result.forEach(x => $.trace.error(JSON.stringify(x)));
 
         $.response.status = $.net.http.OK;
@@ -19,24 +19,24 @@ var user = function (connection, prefix, tableName) {
     };
 
 
-    this.doPost = function (oUser) {
+    this.doPost = function (oAuthor) {
 
-        $.trace.error("oUser:   " + JSON.stringify(oUser));
+        $.trace.error("oAuthor:   " + JSON.stringify(oAuthor));
         //Get Next ID Number
-        oUser.usid = getNextval(`${PREFIX}usid`);
+        oAuthor.author_id = getNextval(`${sPREFIX}author_id`);
 
         //generate query
-        const statement = PreparedStatementLib.createPreparedInsertStatement(USER_TABLE, oUser);
+        const statement = PreparedStatementLib.createPreparedInsertStatement(sTABLE_NAME, oAuthor);
         //execute update
         connection.executeUpdate(statement.sql, statement.aValues);
 
         connection.commit();
         $.response.status = $.net.http.CREATED;
-        $.response.setBody(JSON.stringify(oUser));
+        $.response.setBody(JSON.stringify(oAuthor));
     };
 
 
-    this.doPut = function (oUser) {
+    this.doPut = function (oAuthor) {
         //generate query
         let oResult = {
             aParams: [],
@@ -44,7 +44,7 @@ var user = function (connection, prefix, tableName) {
             sql: "",
         };
 
-        oResult.sql = `UPDATE "${USER_TABLE}" SET "name"='${oUser.name}' WHERE "usid"=${oUser.usid};`;
+        oResult.sql = `UPDATE "${sTABLE_NAME}" SET "name"='${oAuthor.name}' WHERE "author_id"=${oAuthor.author_id};`;
 
         $.trace.error("sql to update: " + oResult.sql);
 
@@ -53,11 +53,11 @@ var user = function (connection, prefix, tableName) {
 
         connection.commit();
         $.response.status = $.net.http.OK;
-        $.response.setBody(JSON.stringify(oUser));
+        $.response.setBody(JSON.stringify(oAuthor));
     };
 
-    this.doDelete = function (usid) {
-        const statement = PreparedStatementLib.createPreparedDeleteStatement(USER_TABLE, {usid: usid});
+    this.doDelete = function (author_id) {
+        const statement = PreparedStatementLib.createPreparedDeleteStatement(sTABLE_NAME, {author_id: author_id});
         connection.executeUpdate(statement.sql, statement.aValues);
 
         connection.commit();
