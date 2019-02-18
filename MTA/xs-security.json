@@ -3,16 +3,16 @@
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
   "scopes": [{
-      "name": "uaa.user",
+      "name": "uaa.author",
       "description": "UAA"
     },
     {
       "name": "$XSAPPNAME.himta.view",
-      "description": "Display users"
+      "description": "Display authors"
     },
     {
       "name": "$XSAPPNAME.himta.create",
-      "description": "Create users"
+      "description": "Create authors"
     }
   ],
   "attributes": [{
@@ -24,7 +24,7 @@
       "name": "Token_Exchange",
       "description": "UAA",
       "scope-references": [
-        "uaa.user"
+        "uaa.author"
       ]
     },
     {
@@ -37,7 +37,7 @@
       "attribute-references": []
     },
     {
-      "name": "SimpleUser",
+      "name": "Simpleauthor",
       "description": "Display mode only",
       "scope-references": [
         "$XSAPPNAME.himta.view"

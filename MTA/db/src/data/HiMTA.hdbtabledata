@@ -2,15 +2,15 @@
   "format_version": 1,
   "imports": [
     {
-      "target_table": "HiMTA::User",
+      "target_table": "HiMTA::Author",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "HiMTA::Users.csv",
+        "file_name": "HiMTA::Authors.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-          "usid",
+          "author_id",
           "name"
         ]
       }
@@ -24,7 +24,7 @@
       },
       "import_settings": {
         "import_columns": [
-					"usid",
+					"author_id",
 					"city",
 					"strt",
 					"hnum"
@@ -32,17 +32,17 @@
       }
     },
     {
-      "target_table": "HiMTA::ExtraInfo.Cars",
+      "target_table": "HiMTA::ExtraInfo.Book",
       "source_data": {
         "data_type": "CSV",
-        "file_name": "HiMTA::Cars.csv",
+        "file_name": "HiMTA::Books.csv",
         "has_header": true
       },
       "import_settings": {
         "import_columns": [
-					"crid",
-          "usid",
-          "name"
+					"book_id",
+                    "author_id",
+                    "name"
         ]
       }
     }

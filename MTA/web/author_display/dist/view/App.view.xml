@@ -1,0 +1,32 @@
+<mvc:View
+    controllerName="author_display.controller.App"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    >
+    <Shell>
+        <App id = "app">
+        <Page
+        id="mainPage"
+        title = "{i18n>mainPageTitle}"
+        class = "sapUiResponsiveContentPadding">
+        <content>
+            <List
+                id="authorList"
+				headerText="{i18n>listHeader}"
+				items="{
+					path: 'authors>/Authors',
+					factory: '.listFactory'
+				}">
+				<ObjectListItem
+					id="item"
+                    type = "Active"
+                    title = "{authors>name}"
+                    press = ".goToDetails">
+				</ObjectListItem>
+            </List>
+        </content>
+        </Page>
+        </App>
+    </Shell>
+</mvc:View>
