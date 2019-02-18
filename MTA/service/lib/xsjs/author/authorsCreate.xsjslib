@@ -18,15 +18,11 @@ function authorsCreate(param){
     $.trace.error(JSON.stringify(oAuthor));
 
     //Get Next Personnel Number
-    pStmt = param.connection.prepareStatement(`select "${sAUTHOR_ID}".NEXTVAL from dummy`);
+    pStmt = param.connection.prepareStatement(`select "${sTABLE_NAME}".NEXTVAL from dummy`);
     var result = pStmt.executeQuery();
 
     while (result.next()) {
-<<<<<<< HEAD
         oAuthor.author_id = result.getString(1);
-=======
-        oAuthor.auhtor_id = result.getString(1);
->>>>>>> 7598c80ff2b81b7cfc8304403632cb4d11030d9a
     }
 
     $.trace.error(JSON.stringify(oAuthor));
