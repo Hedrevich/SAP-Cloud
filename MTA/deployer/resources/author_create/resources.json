@@ -12,10 +12,14 @@
             "name": "Component.js"
         },
         {
-            "name": "di.code-validation.core_issues.json"
+            "name": "controller\\Create-dbg.controller.js",
+            "isDebug": true
         },
         {
-            "name": "fragment\\ConfirmDeleteDialog.fragment.xml"
+            "name": "controller\\Create.controller.js"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
         },
         {
             "name": "index.html"
@@ -31,7 +35,7 @@
             "name": "tmp\\Component.js"
         },
         {
-            "name": "tmp\\fragment\\ConfirmDeleteDialog.fragment.xml"
+            "name": "tmp\\controller\\Create.controller.js"
         },
         {
             "name": "tmp\\index.html"
@@ -40,7 +44,16 @@
             "name": "tmp\\manifest.json"
         },
         {
+            "name": "tmp\\view\\author_create.view.xml"
+        },
+        {
             "name": "tmp-dbg\\Component.js"
+        },
+        {
+            "name": "tmp-dbg\\controller\\Create.controller.js"
+        },
+        {
+            "name": "view\\author_create.view.xml"
         },
         {
             "name": "xs-app.json"
